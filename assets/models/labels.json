@@ -1,0 +1,21 @@
+{
+    "version": 1,
+    "class_order": [
+        "Fitoptora",
+        "Sana",
+        "Plaga_Chinche",
+        "Monilia"
+    ],
+    "class_to_index": {
+        "Fitoptora": 0,
+        "Sana": 1,
+        "Plaga_Chinche": 2,
+        "Monilia": 3
+    },
+    "display_names_es": {
+        "Fitoptora": "Fitóftora",
+        "Sana": "Sana",
+        "Plaga_Chinche": "Daño por chinche",
+        "Monilia": "Moniliasis"
+    }
+}
