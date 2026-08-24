@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "av-cacao",
+    "name": "AV-Cacao",
     "slug": "av-cacao",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,7 +8,8 @@
     "scheme": "avcacao",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/images/icon.png",
+      "bundleIdentifier": "com.jhosepsf.avcacao"
     },
     "android": {
       "adaptiveIcon": {
@@ -17,11 +18,16 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "package": "com.jhosepsf.avcacao",
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/icon.png"
     },
     "plugins": [
       "expo-router",
@@ -32,11 +38,43 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
-      ]
+      ],
+      "onnxruntime-react-native/app.plugin",
+      [
+        "expo-asset",
+        {
+          "assets": [
+            "./assets/models/cacao_yolo26n_seg.onnx",
+            "./assets/models/resnet18_cacao.onnx"
+          ]
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Permite a AV-Cacao acceder a la cámara para tomar fotos de las mazorcas de cacao."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Permite a AV-Cacao acceder a la galería para seleccionar fotos de las mazorcas de cacao."
+        }
+      ],
+      "expo-font",
+      "expo-image",
+      "expo-status-bar",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "47829ca7-521a-4fb6-9059-98068988fa03"
+      }
+    },
+    "owner": "jhosepe"
   }
 }

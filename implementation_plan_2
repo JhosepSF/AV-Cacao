@@ -1,0 +1,55 @@
+# Plan de Implementación: Downgrade a Expo SDK 54.0+
+
+Este plan detalla los pasos para reestructurar y degradar la aplicación móvil **AV-Cacao** desde Expo SDK 57 a **Expo SDK 54.0+**, para asegurar compatibilidad con la versión del cliente de Expo Go en los dispositivos de prueba.
+
+## Resumen del Downgrade
+
+- **Objetivo:** Cambiar el SDK de la aplicación de `57.x` a `54.x`.
+- **Compatibilidad del Core de SDK 54:**
+  - **React Native:** `0.81.x`
+  - **React:** `19.1.0`
+- **Estrategia:** 
+  1. Modificar `package.json` para apuntar a la versión de Expo SDK 54.
+  2. Ejecutar `npx expo install expo@^54.0.0 --fix` para alinear automáticamente todas las dependencias del ecosistema Expo (como `expo-router`, `expo-camera`, etc.) a sus versiones correspondientes y compatibles de SDK 54.
+  3. Re-instalar dependencias limpiando el caché de `node_modules` y `.expo`.
+  4. Resolver discrepancias de tipos o APIs si existen entre SDK 57 y SDK 54.
+
+---
+
+## Cambios Propuestos
+
+### 1. Actualización de package.json
+Modificar la definición de dependencias base de Expo y react para alinear a SDK 54.
+
+#### [MODIFY] [package.json](file:///c:/Users/JhosepSF/Downloads/AV-Cacao/package.json)
+- Cambiar la versión de `"expo"` a `"~54.0.0"`
+- Cambiar la versión de `"react"` a `"19.1.0"`
+- Cambiar la versión de `"react-dom"` a `"19.1.0"`
+- Cambiar la versión de `"react-native"` a `"0.81.0"`
+
+### 2. Actualización Automatizada y Limpieza de Caché
+- Ejecutar:
+  ```bash
+  npx expo install expo@^54.0.0 --fix
+  ```
+- Eliminar la carpeta `node_modules` y `.expo`.
+- Correr `npm install` para consolidar el árbol de dependencias.
+
+### 3. Resolución de Tipos y Código (si aplica)
+- Correr `npx tsc --noEmit` para verificar problemas de compilación en `src/`.
+- Ajustar cualquier uso de APIs nativas de Expo que hayan cambiado entre la versión 57 y la 54 (por ejemplo, cambios menores en `expo-camera` o `expo-image-picker`).
+
+---
+
+## Plan de Verificación
+
+### Pruebas Unitarias
+- Ejecutar `npm test` para asegurar que el pipeline de ML y las utilidades geométricas sigan funcionando correctamente tras el downgrade de React/React Native.
+
+### Compilación y Ejecución
+1. Correr `npx tsc --noEmit` para asegurar que no hay errores de TypeScript.
+2. Iniciar el servidor con el caché limpio:
+   ```bash
+   npx expo start -c
+   ```
+3. Verificar que no se muestre el error de versión incompatible en Expo Go.
