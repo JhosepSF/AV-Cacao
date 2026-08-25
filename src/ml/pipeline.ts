@@ -1,3 +1,7 @@
+if (typeof (globalThis as any).Buffer === 'undefined') {
+  (globalThis as any).Buffer = require('buffer').Buffer;
+}
+
 import { ModelLoader } from './inference/ModelLoader';
 import { loadAndProcessImage } from './preprocessing/exif';
 import { segmentCacao } from './segmentation/segmentationService';
