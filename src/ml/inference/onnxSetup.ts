@@ -1,3 +1,7 @@
+if (typeof (globalThis as any).Buffer === 'undefined') {
+  (globalThis as any).Buffer = require('buffer').Buffer;
+}
+
 const rn = require('react-native');
 
 // Check if Onnxruntime is already defined in NativeModules (e.g. in development build)

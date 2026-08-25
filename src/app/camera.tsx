@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
@@ -89,43 +90,43 @@ export default function CameraScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      <CameraView style={StyleSheet.absoluteFill} ref={cameraRef} facing="back">
-        {/* Overlay guiding UI */}
-        <View style={styles.overlayContainer}>
-          {/* Top banner */}
-          <View style={styles.topBanner}>
-            <Text style={styles.bannerText}>Coloca la mazorca de cacao en el centro</Text>
-          </View>
-
-          {/* Central Guide Grid / Oval */}
-          <View style={styles.guideContainer}>
-            <View style={styles.guideOval} />
-          </View>
-
-          {/* Bottom control bar */}
-          <View style={styles.controlBar}>
-            {/* Gallery button */}
-            <TouchableOpacity style={styles.galleryButton} onPress={pickFromGallery}>
-              <View style={styles.galleryIconInner} />
-              <Text style={styles.controlText}>Galería</Text>
-            </TouchableOpacity>
-
-            {/* Shutter button */}
-            <TouchableOpacity 
-              style={[styles.shutterButton, isTakingPhoto && styles.shutterButtonDisabled]} 
-              onPress={takePhoto}
-              disabled={isTakingPhoto}
-            >
-              <View style={styles.shutterInner} />
-            </TouchableOpacity>
-
-            {/* Cancel button */}
-            <TouchableOpacity style={styles.cancelButton} onPress={() => router.back()}>
-              <Text style={styles.cancelText}>Cancelar</Text>
-            </TouchableOpacity>
-          </View>
+      <CameraView style={StyleSheet.absoluteFill} ref={cameraRef} facing="back" />
+      
+      {/* Overlay guiding UI positioned absolutely on top */}
+      <View style={[StyleSheet.absoluteFill, styles.overlayContainer]}>
+        {/* Top banner */}
+        <View style={styles.topBanner}>
+          <Text style={styles.bannerText}>Coloca la mazorca de cacao en el centro</Text>
         </View>
-      </CameraView>
+
+        {/* Central Guide Grid / Oval */}
+        <View style={styles.guideContainer}>
+          <View style={styles.guideOval} />
+        </View>
+
+        {/* Bottom control bar */}
+        <View style={styles.controlBar}>
+          {/* Gallery button */}
+          <TouchableOpacity style={styles.galleryButton} onPress={pickFromGallery}>
+            <View style={styles.galleryIconInner} />
+            <Text style={styles.controlText}>Galería</Text>
+          </TouchableOpacity>
+
+          {/* Shutter button */}
+          <TouchableOpacity 
+            style={[styles.shutterButton, isTakingPhoto && styles.shutterButtonDisabled]} 
+            onPress={takePhoto}
+            disabled={isTakingPhoto}
+          >
+            <View style={styles.shutterInner} />
+          </TouchableOpacity>
+
+          {/* Cancel button */}
+          <TouchableOpacity style={styles.cancelButton} onPress={() => router.back()}>
+            <Text style={styles.cancelText}>Cancelar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }
