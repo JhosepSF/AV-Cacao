@@ -1,5 +1,9 @@
 if (typeof (globalThis as any).Buffer === 'undefined') {
-  (globalThis as any).Buffer = require('buffer').Buffer;
+  const BufferVal = require('buffer').Buffer;
+  (globalThis as any).Buffer = BufferVal;
+  if (typeof (globalThis as any).global !== 'undefined') {
+    (globalThis as any).global.Buffer = BufferVal;
+  }
 }
 
 import { ModelLoader } from './inference/ModelLoader';
@@ -13,7 +17,8 @@ import { classifyCacao } from './classification/classifierService';
 import { PipelineResult, SegmentationResult } from '../types';
 import { YoloDetection } from './segmentation/Yolo26SegDecoder';
 import * as FileSystem from 'expo-file-system/legacy';
-import jpeg from 'jpeg-js';
+
+const jpeg = require('jpeg-js');
 import { encodeBase64 } from '../utils/sha256';
 
 /**
