@@ -1,5 +1,5 @@
 if (typeof (globalThis as any).Buffer === 'undefined') {
-  const BufferVal = require('buffer/').Buffer;
+  const BufferVal = require('buffer/index.js').Buffer;
   (globalThis as any).Buffer = BufferVal;
   if (typeof (globalThis as any).global !== 'undefined') {
     (globalThis as any).global.Buffer = BufferVal;

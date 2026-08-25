@@ -1,5 +1,5 @@
 if (typeof (globalThis as any).Buffer === 'undefined') {
-  (globalThis as any).Buffer = require('buffer/').Buffer;
+  (globalThis as any).Buffer = require('buffer/index.js').Buffer;
 }
 
 const rn = require('react-native');
