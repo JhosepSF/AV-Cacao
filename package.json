@@ -5,6 +5,7 @@
   "dependencies": {
     "@expo/ui": "~56.0.26",
     "@react-native-async-storage/async-storage": "2.2.0",
+    "buffer": "^6.0.3",
     "expo": "^56.0.0",
     "expo-asset": "~56.0.23",
     "expo-camera": "~56.0.8",
